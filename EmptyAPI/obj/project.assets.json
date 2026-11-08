@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/dabi/Desktop/ASPNet/EmptyAPI/EmptyAPI.csproj",
+      "projectUniqueName": "/home/dabi/Desktop/ASPNet10/EmptyAPI/EmptyAPI.csproj",
       "projectName": "EmptyAPI",
-      "projectPath": "/home/dabi/Desktop/ASPNet/EmptyAPI/EmptyAPI.csproj",
+      "projectPath": "/home/dabi/Desktop/ASPNet10/EmptyAPI/EmptyAPI.csproj",
       "packagesPath": "/home/dabi/.nuget/packages/",
-      "outputPath": "/home/dabi/Desktop/ASPNet/EmptyAPI/obj/",
+      "outputPath": "/home/dabi/Desktop/ASPNet10/EmptyAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/dabi/.nuget/NuGet/NuGet.Config"
