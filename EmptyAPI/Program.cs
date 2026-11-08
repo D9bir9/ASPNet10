@@ -7,15 +7,16 @@ var app = builder.Build();
 
 app.Use(async (HttpContext context, RequestDelegate next) =>
 {
-    await context.Response.WriteAsync("From Middleware 1");
+    await context.Response.WriteAsync("From Middleware 1\n");
     await next(context);
 });
 
-app.UseMiddleware<CustomMiddlewareClass>();
+// app.UseMiddleware<CustomMiddlewareClass>();
+app.UseMyCustomMiddleware();
 
 app.Run(async (HttpContext context) =>
 {
-    await context.Response.WriteAsync("From Middleware 3");
+    await context.Response.WriteAsync("From Middleware 3\n");
 });
 
 app.Run();
