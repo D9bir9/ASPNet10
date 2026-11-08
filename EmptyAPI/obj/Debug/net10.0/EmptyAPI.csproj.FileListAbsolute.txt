@@ -26,3 +26,4 @@
 /home/dabi/Desktop/ASPNet/EmptyAPI/obj/Debug/net10.0/EmptyAPI.pdb
 /home/dabi/Desktop/ASPNet/EmptyAPI/obj/Debug/net10.0/EmptyAPI.genruntimeconfig.cache
 /home/dabi/Desktop/ASPNet/EmptyAPI/obj/Debug/net10.0/ref/EmptyAPI.dll
+/home/dabi/Desktop/ASPNet/EmptyAPI/obj/Debug/net10.0/EmptyAPI.sourcelink.json
