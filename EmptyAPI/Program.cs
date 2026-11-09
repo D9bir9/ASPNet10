@@ -1,23 +1,18 @@
-using EmptyAPI.CustomMiddleware;
-
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddTransient<CustomMiddlewareClass>();
-
 var app = builder.Build();
 
-app.Use(async (HttpContext context, RequestDelegate next) =>
+app.UseWhen(context => context.Request.Query.ContainsKey("username"),
+app =>
 {
-    await context.Response.WriteAsync("From Middleware 1\n");
-    await next(context);
+    app.Use(async (context, next) =>
+    {
+        await context.Response.WriteAsync($"Hello {context.Request.Query["username"]} from UseWhen Middleware branch\n");
+        await next();
+    });
 });
 
-// app.UseMiddleware<CustomMiddlewareClass>();
-app.UseHelloCustomMiddleware();
-app.UsePracticeMiddleware();
-
-app.Run(async (HttpContext context) =>
+app.Use(async (HttpContext context, RequestDelegate next)  =>
 {
-    await context.Response.WriteAsync("From Middleware 3\n");
+    await context.Response.WriteAsync("Hello from main branch middleware\n");
 });
-
 app.Run();
