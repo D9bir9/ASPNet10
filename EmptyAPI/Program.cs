@@ -1,18 +1,27 @@
-using EmptyAPI;
-using Microsoft.Extensions.Primitives;
-
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.UseWhen(context => context.Request.Method == "POST", app =>
+//Routing is automatically enabled.
+//No need for app.UseRouting() anymore.
+
+app.Map("map1", async (context) =>
 {
-    app.UseLoginSystem();
+    await context.Response.WriteAsync("In Map 1");
 });
-app.Use(async (context, next) =>
+
+app.Map("map2", async (context) =>
 {
-    context.Response.StatusCode = 200;
-    await context.Response.WriteAsync("No response\n");
-    await next(context);
+    await context.Response.WriteAsync("In Map 2");
 });
+
+//Fallback for any other request
+app.MapFallback(async (context) =>
+{
+    string path = context.Request.Path;
+    await context.Response.WriteAsync($"Request received at {path}");
+});
+
+// When you create a middleware with app.Use, it gets executed before the routing middleware. 
+// So, if you want to execute some logic before routing, you can use app.Use. 
 
 app.Run();
