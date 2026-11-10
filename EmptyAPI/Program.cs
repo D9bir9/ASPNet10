@@ -4,12 +4,12 @@ var app = builder.Build();
 //Routing is automatically enabled.
 //No need for app.UseRouting() anymore.
 
-app.Map("map1", async (context) =>
+app.MapGet("map1", async (context) =>
 {
     await context.Response.WriteAsync("In Map 1");
 });
 
-app.Map("map2", async (context) =>
+app.MapPost("map2", async (context) =>
 {
     await context.Response.WriteAsync("In Map 2");
 });
