@@ -4,21 +4,25 @@ var app = builder.Build();
 //Routing is automatically enabled.
 //No need for app.UseRouting() anymore.
 
-app.MapGet("map1", async (context) =>
+// E.g: files/sample.txt
+app.Map("files/{filename}.{extension}", async context =>
 {
-    await context.Response.WriteAsync("In Map 1");
+    string? fileName = Convert.ToString(context.Request.RouteValues["filename"]);
+    string? extension = Convert.ToString(context.Request.RouteValues["extension"]);
+    await context.Response.WriteAsync($"In files - {fileName}.{extension}");
 });
 
-app.MapPost("map2", async (context) =>
+// E.g: employee/profile/john
+app.Map("employee/profile/{employeeName}", async context =>
 {
-    await context.Response.WriteAsync("In Map 2");
+    string? employeeName = Convert.ToString(context.Request.RouteValues["employeename"]);
+    await context.Response.WriteAsync($"In employee profile - {employeeName}");
 });
 
 //Fallback for any other request
 app.MapFallback(async (context) =>
 {
-    string path = context.Request.Path;
-    await context.Response.WriteAsync($"Request received at {path}");
+    await context.Response.WriteAsync($"Request received at {context.Request.Path}");
 });
 
 // When you create a middleware with app.Use, it gets executed before the routing middleware. 
