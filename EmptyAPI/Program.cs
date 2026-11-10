@@ -5,7 +5,7 @@ var app = builder.Build();
 //No need for app.UseRouting() anymore.
 
 // E.g: files/sample.txt
-app.Map("files/{filename}.{extension}", async context =>
+app.Map("files/{filename}.{extension=txt}", async context =>
 {
     string? fileName = Convert.ToString(context.Request.RouteValues["filename"]);
     string? extension = Convert.ToString(context.Request.RouteValues["extension"]);
@@ -13,10 +13,17 @@ app.Map("files/{filename}.{extension}", async context =>
 });
 
 // E.g: employee/profile/john
-app.Map("employee/profile/{employeeName}", async context =>
+app.Map("employee/profile/{employeeName=scott}", async context =>
 {
     string? employeeName = Convert.ToString(context.Request.RouteValues["employeename"]);
     await context.Response.WriteAsync($"In employee profile - {employeeName}");
+});
+
+// E.g: product/details/1
+app.Map("product/details/{productId:int=1}", async context =>
+{
+    int productId = Convert.ToInt32(context.Request.RouteValues["productid"]);
+    await context.Response.WriteAsync($"In product details - {productId}");
 });
 
 //Fallback for any other request
