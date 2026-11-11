@@ -37,11 +37,23 @@ app.Map("product/details/{id?}", async context =>
         await context.Response.WriteAsync($"In product details - No ID provided");
     }
 });
-
+// E.g: daily-digest-report/{reportdate}
+app.Map("daily-digest-report/{reportdate:datetime}", async context =>
+{
+    DateTime reportDate = Convert.ToDateTime(context.Request.RouteValues["reportdate"]);
+    await context.Response.WriteAsync($"In daily digest report - {reportDate.ToShortDateString()}");
+});
 //Fallback for any other request
 app.MapFallback(async (context) =>
 {
     await context.Response.WriteAsync($"Request received at {context.Request.Path}");
+});
+
+// E.g: cities/{cityid}
+app.Map("cities/{cityid:guid}", async context =>
+{
+    Guid cityId = Guid.Parse(Convert.ToString(context.Request.RouteValues["cityid"]));
+    await context.Response.WriteAsync($"City information - {cityId}");
 });
 
 // When you create a middleware with app.Use, it gets executed before the routing middleware. 
